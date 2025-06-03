@@ -18,5 +18,9 @@ class TestLeafNode(unittest.TestCase):
             "this is bold text",
         )
         self.assertEqual(node.to_html(), "<b>this is bold text</b>")
+        
+    def test_leaf_to_html_no_tag(self):
+        node = LeafNode(None, "Hello, world!")
+        self.assertEqual(node.to_html(), "Hello, world!")
 if __name__ == "__main__":
     unittest.main()
