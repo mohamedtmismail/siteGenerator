@@ -9,6 +9,3 @@ class LeafNode(HTMLNode):
         if self.tag == None or self.tag == "":
             return f"{self.value}"
         return f"<{self.tag}{self.props_to_html()}>{self.value}</{self.tag}>"
-   
-    def __repr__(self):
-        return f"LeafNode({self.tag}, {self.value}, children: {self.children}, {self.props})"
