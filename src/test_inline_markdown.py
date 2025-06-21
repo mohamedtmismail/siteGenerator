@@ -1,11 +1,11 @@
 import unittest
-from utilities import (
+from inline_markdown import (
     extract_markdown_images,
     extract_markdown_links,
     split_nodes_delimiter,
     split_nodes_image,
     split_nodes_link,
-    text_to_textnodes
+    text_to_textnodes,
 )
 
 from textnode import TextNode, TextType
@@ -289,6 +289,7 @@ class TestInlineMarkdown(unittest.TestCase):
             ],
             new_nodes
         )
+        
 
     def test_text_to_textnodes_empty_string(self):
         new_nodes = text_to_textnodes("")
