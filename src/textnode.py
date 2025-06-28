@@ -23,6 +23,9 @@ class TextNode:
             and self.text_type == other.text_type
             and self.url == other.url
         )
+    
+    def to_html(self):
+        return text_node_to_html_node(self)
 
     def __repr__(self):
         return f"TextNode({self.text}, {self.text_type.value}, {self.url})"
