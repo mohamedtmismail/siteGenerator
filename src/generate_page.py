@@ -3,20 +3,20 @@ from markdown_blocks import markdown_to_html_node
 from pathlib import Path
 
 
-def generate_page_recursive(dir_path_content, template_path, dest_dir_path):
+def generate_page_recursive(dir_path_content, template_path, dest_dir_path, basepath):
     for filename in os.listdir(dir_path_content):
         from_path = os.path.join(dir_path_content, filename)
         dest_path = os.path.join(dest_dir_path, filename)
         print(f" * {from_path} -> {dest_path}")
         if os.path.isfile(from_path):
             dest_path = Path(dest_path).with_suffix(".html")
-            generate_page(from_path, template_path, dest_path)
+            generate_page(from_path, template_path, dest_path, basepath)
         else:
-            generate_page_recursive(from_path,template_path, dest_path)
+            generate_page_recursive(from_path,template_path, dest_path, basepath)
 
 
 
-def generate_page(from_path, template_path, dest_path):
+def generate_page(from_path, template_path, dest_path, basepath):
     print(f"Genertating page form {from_path} to {dest_path} using {template_path}")
     
     md = ""
@@ -45,6 +45,8 @@ def generate_page(from_path, template_path, dest_path):
     print(title)
     page_with_title = template_content.replace("{{ Title }}", title)
     page_with_content = page_with_title.replace("{{ Content }}", html)
+    page_with_content = page_with_content.replace ('href="/', f'href="{basepath}')
+    page_with_content = page_with_content.replace ('src="/', f'src="{basepath}')
     
     parent_dir = os.path.dirname(dest_path)
     if parent_dir: os.makedirs(parent_dir, exist_ok=True)
